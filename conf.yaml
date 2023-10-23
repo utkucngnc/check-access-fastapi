@@ -1,0 +1,24 @@
+users:
+  admin:
+    operations:
+      - create
+      - read
+      - update
+      - delete
+    databases:
+      - test
+      - test2
+  customer:
+    operations:
+      -create
+      -read
+      -update
+      -delete
+    databases:
+      -test
+  viewer:
+    operations:
+      -read
+    databases:
+      -test
+      
