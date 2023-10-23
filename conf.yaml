@@ -9,6 +9,9 @@ users:
       - test
       - test2
       - test3
+    collections: 
+      -collect1
+      -collect2
   customer:
     operations:
       - post
@@ -16,10 +19,12 @@ users:
       - put
       - delete
     databases:
-      - test
+      - test2
+    collections:
+      collect2
   viewer:
     operations:
       - get
     databases:
-      - test2
+      - test3
       
