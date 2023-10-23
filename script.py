@@ -1,34 +1,22 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
+from .util import GetConf
 
 app = FastAPI()
-
-# Sample user data for demonstration. In practice, you'd have a proper user management system.
-users = {
-    'admin': {'role': 'admin', 'databases': ['db1', 'db2', 'db3'], 'collections': ['col1', 'col2']},
-    'user1': {'role': 'user', 'databases': ['db1'], 'collections': ['col1']},
-    'user2': {'role': 'visitor', 'databases': ['db2']},
-}
-
-ops = {
-    'admin': ['get', 'post', 'put', 'delete'],
-    'user': ['get', 'post', 'put'],
-    'visitor': ['get'],
-}
 
 # OAuth2 password bearer for authentication
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 class User:
-    def __init__(self, users: dict = users,
-                 token: str = Depends(oauth2_scheme),
-                 ops: dict = ops):
+    def __init__(self, users: dict = GetConf().users,
+                 token: str = Depends(oauth2_scheme)
+                 ):
         self.token = token
         user = users.get(token)
         if user:
-            self.role = user['role']
-            self.databases = user['databases']
-            self.ops = ops.get(self.role)
+            self.role = user.role
+            self.databases = user.databases
+            self.ops = user.operations
         else:
             raise HTTPException(status_code=401, detail="Unauthorized")
         

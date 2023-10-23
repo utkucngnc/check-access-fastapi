@@ -1,24 +1,25 @@
 users:
   admin:
     operations:
-      - create
-      - read
-      - update
+      - post
+      - get
+      - put
       - delete
     databases:
       - test
       - test2
+      - test3
   customer:
     operations:
-      -create
-      -read
-      -update
-      -delete
+      - post
+      - get
+      - put
+      - delete
     databases:
-      -test
+      - test
   viewer:
     operations:
-      -read
+      - get
     databases:
-      -test
+      - test2
       
